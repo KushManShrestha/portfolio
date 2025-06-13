@@ -1,79 +1,87 @@
-/* Modern clean portfolio style */
-
-body {
+/* Reset and fonts */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+body {
   font-family: 'Inter', sans-serif;
   background: #f9fafb;
   color: #1f2937;
+  line-height: 1.6;
 }
 
-.container {
-  max-width: 800px;
-  margin: auto;
-  padding: 2rem;
-}
-
+/* Hero Section */
 .hero {
-  text-align: center;
-  padding: 3rem 1rem 2rem;
-  background: linear-gradient(to right, #6366f1, #60a5fa);
-  border-radius: 16px;
+  background: linear-gradient(to right, #3b82f6, #6366f1);
   color: white;
+  padding: 5rem 1rem;
+  text-align: center;
 }
-
 .hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 2.8rem;
+  font-weight: 600;
 }
-
 .hero p {
   font-size: 1.2rem;
-  opacity: 0.9;
+  margin-top: 0.5rem;
+  opacity: 0.95;
 }
 
-.section {
-  margin-top: 2.5rem;
+/* Container & Sections */
+.container {
+  max-width: 960px;
+  margin: auto;
+  padding: 2rem 1rem;
 }
-
-.section h2 {
-  font-size: 1.5rem;
+section {
+  margin-top: 3rem;
+}
+h2 {
+  font-size: 1.8rem;
   margin-bottom: 1rem;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.5rem;
   color: #111827;
 }
 
-.grid {
+/* Projects Grid */
+.project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
 }
-
-.card {
+.project-card {
   background: white;
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-  text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  font-weight: 600;
-  color: #2563eb;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  transition: 0.2s ease;
   text-decoration: none;
+  color: #111827;
 }
-
-.card:hover {
+.project-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+.project-card:hover {
+  background: #f0f9ff;
   transform: translateY(-4px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  background: #eff6ff;
 }
 
+/* Contact */
 .contact a {
   color: #2563eb;
   text-decoration: none;
 }
+.contact a:hover {
+  text-decoration: underline;
+}
 
+/* Footer */
 footer {
   text-align: center;
-  padding: 2rem 0 1rem;
+  padding: 2rem 1rem;
   font-size: 0.9rem;
   color: #6b7280;
 }
