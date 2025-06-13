@@ -1,57 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kush Man Shrestha | Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Kush Man Shrestha | QA Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: #f8fafc;
+      color: #1e293b;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(to right, #3b82f6, #6366f1);
+      color: white;
+      padding: 4rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 960px;
+      margin: auto;
+      padding: 2rem 1rem;
+    }
+
+    section {
+      margin-top: 3rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #0f172a;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 0.5rem;
+    }
+
+    .projects, .experience, .skills {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .project-card, .exp-card {
+      background: white;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .project-card:hover, .exp-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    }
+
+    .project-card a {
+      text-decoration: none;
+      color: #1d4ed8;
+      font-weight: 600;
+    }
+
+    ul.skills-list {
+      list-style: none;
+      padding: 0;
+      columns: 2;
+    }
+
+    ul.skills-list li {
+      margin: 0.25rem 0;
+    }
+
+    .contact a {
+      color: #1d4ed8;
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
+
 <body>
-  <header class="hero">
-    <div class="hero-content">
-      <h1>Kush Man Shrestha</h1>
-      <p>Software Quality Assurance Engineer</p>
-    </div>
+  <header>
+    <h1>Kush Man Shrestha</h1>
+    <p>QA Engineer focused on quality, clarity, and precision</p>
   </header>
 
-  <main class="container">
+  <main>
     <section class="about">
       <h2>About Me</h2>
-      <p>I’m a passionate QA Engineer focused on quality, performance, and reliability. Experienced in end-to-end testing and Agile processes, I ensure every product meets the highest standards before it reaches users.</p>
+      <p>I’m a detail-oriented QA Engineer with expertise in Black Box and White Box testing, project analysis, and working closely with cross-functional teams to ensure product excellence and quality. My approach is grounded in clarity, collaboration, and continuous improvement.</p>
     </section>
 
     <section class="projects">
       <h2>Projects</h2>
-      <div class="project-grid">
-        <a href="https://sifu.kungfuquiz.com/home" target="_blank" class="project-card">
-          <h3>Kungfu Quiz (Sifu)</h3>
-          <p>EdTech quiz app built for martial arts learners.</p>
-        </a>
-        <a href="https://mysecondteacher.com/" target="_blank" class="project-card">
-          <h3>My Second Teacher</h3>
-          <p>Interactive educational platform for high school students.</p>
-        </a>
-        <a href="https://app.jelajahilmu.com" target="_blank" class="project-card">
-          <h3>Jelajah Ilmu</h3>
-          <p>Indonesian e-learning platform for nationwide schools.</p>
-        </a>
-        <a href="https://app.alstondigital.sg/" target="_blank" class="project-card">
-          <h3>Alston Digital</h3>
-          <p>Corporate content management system for digital assets.</p>
-        </a>
+      <div class="project-card"><a href="https://sifu.kungfuquiz.com/home" target="_blank">Kungfu Quiz (Sifu)</a><p>EdTech martial arts quiz app.</p></div>
+      <div class="project-card"><a href="https://mysecondteacher.com/" target="_blank">My Second Teacher</a><p>Learning platform for high school students.</p></div>
+      <div class="project-card"><a href="https://app.jelajahilmu.com" target="_blank">Jelajah Ilmu</a><p>Indonesian e-learning platform.</p></div>
+      <div class="project-card"><a href="https://app.alstondigital.sg/" target="_blank">Alston Digital</a><p>Content management system.</p></div>
+    </section>
+
+    <section class="experience">
+      <h2>Experience</h2>
+      <div class="exp-card">
+        <h3>Software QA Engineer – My Second Teacher</h3>
+        <p>Led manual test design, API testing, bug tracking, and QA documentation for multiple education modules.</p>
       </div>
+      <div class="exp-card">
+        <h3>QA Analyst – Jelajah Ilmu</h3>
+        <p>Performed regression, integration, and UI testing on a large-scale e-learning platform for Indonesian schools.</p>
+      </div>
+    </section>
+
+    <section class="skills">
+      <h2>Skills & Tools</h2>
+      <ul class="skills-list">
+        <li>GitLab</li>
+        <li>Postman</li>
+        <li>Excel</li>
+        <li>Figma</li>
+        <li>Jira</li>
+        <li>Agile/Scrum</li>
+        <li>Test Case Writing</li>
+        <li>Cross-Functional Collaboration</li>
+      </ul>
     </section>
 
     <section class="contact">
       <h2>Contact</h2>
       <p>Email: <a href="mailto:shresthakush1996@gmail.com">shresthakush1996@gmail.com</a></p>
       <p>Phone: +977 9849-527999</p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/kushshrestha" target="_blank">linkedin.com/in/kushshrestha</a></p>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Kush Man Shrestha. All rights reserved.</p>
+    <p>&copy; 2025 Kush Man Shrestha</p>
   </footer>
 </body>
+
 </html>
