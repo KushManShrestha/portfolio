@@ -1,46 +1,75 @@
-body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background: #f4f4f4;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f2f2f2;
   color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
 }
 
 header {
-  background: #333;
+  text-align: center;
+  background: #1f2937;
   color: #fff;
   padding: 2rem;
-  text-align: center;
+  border-radius: 12px;
+}
+
+header h1 {
+  margin-bottom: 0.5rem;
 }
 
 section {
-  padding: 2rem;
-  max-width: 800px;
-  margin: auto;
   background: #fff;
+  padding: 2rem;
+  margin-top: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
   margin-top: 1rem;
+}
+
+.card {
+  background: #e5e7eb;
+  padding: 1rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: all 0.2s ease;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+.card:hover {
+  background: #d1d5db;
+  transform: translateY(-3px);
 }
 
-li a {
-  color: #0066cc;
+a {
+  color: #1d4ed8;
   text-decoration: none;
+  font-weight: 500;
 }
 
-li a:hover {
+a:hover {
   text-decoration: underline;
 }
 
 footer {
   text-align: center;
-  padding: 1rem;
-  background: #eee;
   margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #777;
 }
