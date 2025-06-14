@@ -3,229 +3,230 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Kush Man Shrestha — Portfolio</title>
+<title>Kush Man Shrestha | Portfolio</title>
 <style>
-  /* Reset & basics */
+  /* Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Roboto+Slab&display=swap');
+
+  /* CSS Reset */
   *, *::before, *::after {
     box-sizing: border-box;
   }
   body {
-    margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f7fa;
-    color: #222;
-    line-height: 1.6;
-    transition: background-color 0.4s ease, color 0.4s ease;
+    margin: 0; background: #f7f7f7; color: #222;
+    font-family: 'Poppins', sans-serif;
+    transition: background 0.3s, color 0.3s;
+    scroll-behavior: smooth;
   }
   body.dark {
-    background-color: #121212;
+    background: #121212;
     color: #eee;
   }
   a {
     color: #0078d7;
     text-decoration: none;
   }
-  a:hover {
+  a:hover, a:focus {
     text-decoration: underline;
   }
+  h1,h2,h3,h4,h5 {
+    margin: 0 0 0.5em 0;
+    font-family: 'Roboto Slab', serif;
+  }
+  h1 {
+    font-size: 2.8rem;
+  }
+  h2 {
+    font-size: 2rem;
+    border-bottom: 2px solid #0078d7;
+    padding-bottom: 6px;
+  }
+  h3 {
+    font-size: 1.25rem;
+    margin-top: 1em;
+    color: #0078d7;
+  }
+
+  /* Container */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1rem 5rem 1rem;
+  }
+
+  /* Header */
   header {
-    background: linear-gradient(90deg, #0078d7, #00aaff);
-    color: white;
-    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1rem 0 1rem;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background 0.3s;
+  }
+  body.dark header {
+    background: #1e1e1e;
+  }
+
+  /* Name and Title */
+  .header-left {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0; z-index: 10;
-    box-shadow: 0 2px 5px rgb(0 0 0 / 0.15);
+    gap: 1rem;
   }
-  header h1 {
-    margin: 0; font-weight: 700; font-size: 1.5rem;
-    letter-spacing: 1.5px;
+  .header-left img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #0078d7;
   }
+  .header-left .name-title {
+    display: flex;
+    flex-direction: column;
+  }
+  .header-left .name-title .name {
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #0078d7;
+  }
+  .header-left .name-title .title {
+    font-weight: 300;
+    font-size: 0.9rem;
+    color: #444;
+  }
+  body.dark .header-left .name-title .title {
+    color: #bbb;
+  }
+
+  /* Nav Tabs */
   nav {
-    display: flex; gap: 1rem;
+    display: flex;
+    gap: 1rem;
   }
   nav button {
-    background: transparent;
+    background: none;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #666;
+    cursor: pointer;
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    transition: background-color 0.25s, color 0.25s;
+  }
+  nav button:hover,
+  nav button:focus {
+    background-color: #0078d7;
+    color: white;
+    outline: none;
+  }
+  nav button.active {
+    background-color: #0078d7;
+    color: white;
+  }
+  body.dark nav button {
+    color: #aaa;
+  }
+  body.dark nav button.active,
+  body.dark nav button:hover {
+    background-color: #3399ff;
+    color: #121212;
+  }
+
+  /* Dark mode toggle button */
+  #darkModeToggle {
+    background: #0078d7;
     border: none;
     color: white;
     font-weight: 600;
-    cursor: pointer;
     padding: 0.5rem 1rem;
     border-radius: 4px;
-    transition: background-color 0.3s ease;
-    font-size: 1rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s;
   }
-  nav button:hover, nav button.active {
-    background-color: rgba(255 255 255 / 0.2);
+  #darkModeToggle:hover, #darkModeToggle:focus {
+    background: #005ea1;
+    outline: none;
   }
-  main {
-    max-width: 900px;
-    margin: 2rem auto 4rem;
-    padding: 0 1rem;
-  }
+
+  /* Section styles */
   section {
-    margin-bottom: 4rem;
+    margin-top: 2rem;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    will-change: opacity, transform;
   }
   section.visible {
     opacity: 1;
     transform: translateY(0);
   }
-  h2 {
-    border-bottom: 3px solid #0078d7;
-    padding-bottom: 0.25rem;
-    margin-bottom: 1rem;
-    font-weight: 700;
-  }
-  h3 {
-    margin: 0.5rem 0 0.25rem;
-    font-weight: 700;
+
+  /* Content Styles */
+  .contact-info strong {
     color: #0078d7;
   }
-  p, ul {
-    margin-top: 0;
-  }
-  ul {
-    padding-left: 1.2rem;
-  }
-  ul li {
-    margin-bottom: 0.25rem;
-  }
   .contact-info a {
-    display: inline-block;
-    margin-right: 1.2rem;
-    font-weight: 600;
+    color: inherit;
+    word-break: break-word;
   }
+
+  /* Download CV button */
   .download-cv {
     display: inline-block;
     margin-top: 1rem;
+    padding: 0.7rem 1.3rem;
     background-color: #0078d7;
     color: white;
-    padding: 0.6rem 1.2rem;
-    font-weight: 700;
+    font-weight: 600;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    text-decoration: none;
+    transition: background-color 0.3s;
   }
-  .download-cv:hover {
-    background-color: #005ea2;
-  }
-
-  /* Dark mode overrides */
-  body.dark a {
-    color: #66aaff;
+  .download-cv:hover, .download-cv:focus {
+    background-color: #005ea1;
   }
   body.dark .download-cv {
     background-color: #3399ff;
+    color: #121212;
   }
   body.dark .download-cv:hover {
     background-color: #0078d7;
-  }
-
-  /* Section content styles */
-  .job, .project, .education-item, .skill-list {
-    margin-bottom: 1rem;
-  }
-  .job-title, .project-title {
-    font-weight: 700;
-  }
-  .timeline {
-    border-left: 3px solid #0078d7;
-    padding-left: 1rem;
-  }
-  .timeline-item {
-    margin-bottom: 1rem;
-    position: relative;
-  }
-  .timeline-item::before {
-    content: "";
-    position: absolute;
-    left: -11px;
-    top: 6px;
-    width: 12px;
-    height: 12px;
-    background-color: #0078d7;
-    border-radius: 50%;
-  }
-
-  /* Dark mode timeline */
-  body.dark .timeline {
-    border-left: 3px solid #3399ff;
-  }
-  body.dark .timeline-item::before {
-    background-color: #3399ff;
-  }
-
-  /* Buttons container for sections */
-  .section-buttons {
-    display: flex;
-    gap: 0.75rem;
-    justify-content: center;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-  }
-  .section-buttons button {
-    background-color: #0078d7;
     color: white;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 30px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-  }
-  .section-buttons button:hover,
-  .section-buttons button.active {
-    background-color: #005ea2;
-  }
-  body.dark .section-buttons button {
-    background-color: #3399ff;
-  }
-  body.dark .section-buttons button:hover,
-  body.dark .section-buttons button.active {
-    background-color: #0078d7;
   }
 
-  /* Dark mode toggle button */
-  #darkModeToggle {
-    background-color: transparent;
-    border: 2px solid white;
-    border-radius: 5px;
-    padding: 0.3rem 0.6rem;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: white;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  #darkModeToggle:hover {
-    background-color: white;
-    color: #0078d7;
-  }
-  body.dark #darkModeToggle {
-    border-color: #3399ff;
-    color: #3399ff;
-  }
-  body.dark #darkModeToggle:hover {
-    background-color: #3399ff;
-    color: white;
+  /* Lists */
+  ul {
+    padding-left: 1.2rem;
   }
 
   /* Responsive */
   @media (max-width: 600px) {
     header {
       flex-direction: column;
-      gap: 0.75rem;
-      padding: 1rem;
+      align-items: flex-start;
+      gap: 1rem;
     }
     nav {
       flex-wrap: wrap;
-      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
     }
-    .section-buttons {
-      justify-content: center;
+    nav button {
+      flex-grow: 1;
+      text-align: center;
+    }
+    .header-left {
+      gap: 0.6rem;
+    }
+    .header-left img {
+      width: 60px;
+      height: 60px;
     }
   }
 </style>
@@ -233,291 +234,272 @@
 <body>
 
 <header>
-  <h1>Kush Man Shrestha</h1>
-  <nav>
-    <button id="navSummary" class="active">Summary</button>
-    <button id="navExperience">Experience</button>
-    <button id="navEducation">Education</button>
-    <button id="navProjects">Projects</button>
-    <button id="navSkills">Skills</button>
-    <button id="navContact">Contact</button>
+  <div class="header-left">
+    <img src="https://media-exp1.licdn.com/dms/image/C5603AQFHLRQHt72vQA/profile-displayphoto-shrink_200_200/0/1657143935773?e=1687996800&v=beta&t=wTVYVZXM44Z-gYX0zQykMi9mV2NFCxT-RY3nUdqz8XA" alt="Kush Man Shrestha Photo" />
+    <div class="name-title">
+      <div class="name">Kush Man Shrestha</div>
+      <div class="title">Software QA Engineer & Project Manager</div>
+    </div>
+  </div>
+  <nav aria-label="Primary navigation">
+    <button id="nav-summary" class="active" aria-controls="summary" aria-selected="true" role="tab">Summary</button>
+    <button id="nav-experience" aria-controls="experience" aria-selected="false" role="tab">Experience</button>
+    <button id="nav-education" aria-controls="education" aria-selected="false" role="tab">Education</button>
+    <button id="nav-projects" aria-controls="projects" aria-selected="false" role="tab">Projects</button>
+    <button id="nav-skills" aria-controls="skills" aria-selected="false" role="tab">Skills</button>
+    <button id="nav-contact" aria-controls="contact" aria-selected="false" role="tab">Contact</button>
   </nav>
-  <button id="darkModeToggle" aria-label="Toggle Dark Mode">Dark Mode</button>
+  <button id="darkModeToggle" aria-label="Toggle dark mode">Dark Mode</button>
 </header>
 
-<main>
+<div class="container" role="tabpanel">
 
-  <!-- Professional Summary -->
-  <section id="summarySection" class="visible">
+  <section id="summary" class="visible" tabindex="0" role="tabpanel" aria-labelledby="nav-summary">
     <h2>Professional Summary</h2>
-    <p>
-      Detail-oriented Software Quality Assurance Engineer with over 3 years of experience in software testing and project coordination. Currently managing projects while also contributing to QA efforts—leading cross-functional teams, gathering requirements, tracking progress, and ensuring timely delivery of high-quality software. Proficient in Black Box and White Box testing techniques with a strong focus on usability, performance, and product reliability. Recognized for clear communication, attention to detail, and commitment to continuous improvement.
-    </p>
+    <p>Detail-oriented Software Quality Assurance Engineer with over 3 years of experience in software testing and project coordination. Currently managing projects while also contributing to QA efforts—leading cross-functional teams, gathering requirements, tracking progress, and ensuring timely delivery of high-quality software. Proficient in Black Box and White Box testing techniques with a strong focus on usability, performance, and product reliability. Recognized for clear communication, attention to detail, and commitment to continuous improvement.</p>
   </section>
 
-  <!-- Experience -->
-  <section id="experienceSection" hidden>
+  <section id="experience" tabindex="0" role="tabpanel" aria-labelledby="nav-experience" hidden>
     <h2>Professional Experience</h2>
-    <div class="timeline">
-      <div class="timeline-item job">
-        <h3 class="job-title">Software QA Engineer & Project Manager <small> | Innovate Tech | Jan 2022 – Present</small></h3>
-        <ul>
-          <li>Manage multiple web and platform-based projects, overseeing timelines, team coordination, and release management.</li>
-          <li>Facilitate sprint planning, daily stand-ups, and stakeholder meetings to ensure smooth project execution.</li>
-          <li>Coordinate with cross-functional teams including developers, designers, and QA to meet deliverables.</li>
-          <li>Design and execute test plans covering functional, regression, integration, and performance testing.</li>
-          <li>Conduct User Acceptance Testing (UAT) sessions and review final deliverables before production deployment.</li>
-          <li>Maintain project documentation including requirements, test cases, release notes, and progress trackers.</li>
-          <li>Tools used: GitLab, Figma, InVision, Google Chat, Microsoft Office Suite.</li>
-        </ul>
-      </div>
-
-      <div class="timeline-item job">
-        <h3 class="job-title">Project Business Analyst (Trainee) <small> | InfoDevelopers Pvt. Ltd. | Jul 2021 – Dec 2021</small></h3>
-        <ul>
-          <li>Participated in requirement gathering and stakeholder discussions to define clear project goals.</li>
-          <li>Drafted documentation including user stories and process flows to support development and QA teams.</li>
-          <li>Helped improve communication between business and technical teams for better delivery outcomes.</li>
-        </ul>
-      </div>
-
-      <div class="timeline-item job">
-        <h3 class="job-title">Customer Service Representative <small> | Innovate Tech | Dec 2020 – May 2021</small></h3>
-        <ul>
-          <li>Delivered technical assistance and product support to users via calls and chat.</li>
-          <li>Conducted user onboarding sessions and reported usability issues to the development team.</li>
-          <li>Documented user feedback and contributed to prioritizing feature improvements.</li>
-        </ul>
-      </div>
-
-      <div class="timeline-item job">
-        <h3 class="job-title">Marketing Executive & IT Support <small> | Webbook | Jan 2015 – Mar 2016</small></h3>
-        <ul>
-          <li>Assisted hotel clients in upgrading digital systems, offering product setup and training.</li>
-          <li>Provided basic IT troubleshooting and support.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Education -->
-  <section id="educationSection" hidden>
-    <h2>Education</h2>
-    <div class="timeline">
-      <div class="timeline-item education-item">
-        <h3>MSc in Information Technology and Applied Security</h3>
-        <p>Islington College, London Metropolitan University — 2024</p>
-      </div>
-      <div class="timeline-item education-item">
-        <h3>BSc (Hons) in Computer Science</h3>
-        <p>Herald College Kathmandu, University of Wolverhampton — 2019</p>
-      </div>
-      <div class="timeline-item education-item">
-        <h3>+2 in Computer Science</h3>
-        <p>Kathmandu Model College, Tribhuvan University — 2014</p>
-      </div>
-      <div class="timeline-item education-item">
-        <h3>School Leaving Certificate</h3>
-        <p>Buddha Jyoti Academy — 2012</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section id="projectsSection" hidden>
-    <h2>Professional Projects</h2>
-    <div class="project">
-      <h3>Kungfu Quiz (KFQ) Platform</h3>
-      <ul>
-        <li>Worked as Project Manager, overseeing the end-to-end delivery of new features across KFQ projects.</li>
-        <li>Coordinated cross-functional teams including design, development, and QA to align goals and timelines.</li>
-        <li>Led sprint planning, daily stand-ups, and milestone tracking using GitLab Kanban boards and Excel sheets.</li>
-        <li>Collaborated with stakeholders to gather, refine, and document technical and functional requirements.</li>
-        <li>Supervised User Acceptance Testing (UAT) and ensured production readiness through structured final reviews.</li>
-        <li>Maintained comprehensive documentation including requirement documents, design flows, test plans, release notes, and project trackers.</li>
-        <li>Proposed and discussed new feature ideas to enhance platform functionality, such as AI-driven question generation and improved analytics dashboards.</li>
-        <li>Tools used: GitLab, Figma, InVision, Excel, Google Docs.</li>
-      </ul>
-    </div>
-    <div class="project">
-      <h3>My Second Teacher (MST) Platform</h3>
-      <ul>
-        <li>Led comprehensive Software Quality Assurance (QA) for MST and its four forks: Global, Nepal, Alston Digital, and JelajahIlmu (Indonesia), including their back-office systems (Apollo).</li>
-        <li>Performed functional, regression, integration, and usability testing to ensure software stability, performance, and consistent user experience across all platform versions.</li>
-        <li>Collaborated with developers to identify, document, prioritize, and track defects for timely resolution.</li>
-        <li>Participated in requirements review and test planning sessions aligned with business objectives.</li>
-        <li>Delivered detailed test reports and communicated progress to stakeholders.</li>
-      </ul>
-    </div>
-    <div class="project">
-      <h3>Interactive Video Publisher (IVy) – MST</h3>
-      <ul>
-        <li>Tested the IVy platform for uploading educational videos and embedding interactive questions.</li>
-        <li>Verified accurate triggering of questions during video playback for smooth user engagement.</li>
-        <li>Tested multiple question types and formats to ensure functionality and user response capture.</li>
-        <li>Reported bugs and collaborated with developers to improve platform reliability.</li>
-      </ul>
-    </div>
-    <div class="project">
-      <h3>WRL Supervisor</h3>
-      <ul>
-        <li>Selected as Project Manager for the Work-Related Learning (WRL) module, overseen by Islington College.</li>
-        <li>Led and mentored 18 interns, providing guidance on project delivery and professional development.</li>
-        <li>Supervised the successful development and deployment of an HRM web application with 20+ key features, including employee management, leave requests, approvals, and event calendars.</li>
-        <li>Collaborated with fellow WRL supervisors to support career growth and adaptability across the internship program.</li>
-      </ul>
-    </div>
-
-    <h2>Academic Projects</h2>
-    <div class="project">
-      <h3>Heart Failure Detection Data Analytics (Master’s Thesis)</h3>
-      <ul>
-        <li>Developed a data analytics model to identify key indicators and patterns associated with heart failure.</li>
-        <li>Analyzed large healthcare datasets using statistical and machine learning techniques.</li>
-        <li>Delivered actionable insights to improve diagnostic accuracy and predictive modeling.</li>
-      </ul>
-    </div>
-    <div class="project">
-      <h3>Nepal Gadgets (Web-based E-commerce Application)</h3>
-      <ul>
-        <li>Designed and implemented an e-commerce platform for electronic gadgets with user and admin login functionalities.</li>
-        <li>Integrated search, product management, order confirmation, and user management features to enhance usability and sales efficiency.</li>
-      </ul>
-    </div>
-
-    <h2>Project Links</h2>
+    <h3>Software QA Engineer & Project Manager</h3>
+    <p><strong>Innovate Tech | Jan 2022 – Present</strong></p>
     <ul>
-      <li><a href="https://mysecondteacher.com" target="_blank" rel="noopener noreferrer">My Second Teacher (Global)</a></li>
-      <li><a href="https://mysecondteacher.com.np" target="_blank" rel="noopener noreferrer">My Second Teacher (Nepal)</a></li>
-      <li><a href="https://app.alstondigital.sg/" target="_blank" rel="noopener noreferrer">Alston Digital</a></li>
-      <li><a href="https://app.jelajahilmu.com/" target="_blank" rel="noopener noreferrer">JelajahIlmu (Indonesia)</a></li>
-      <li><a href="https://ivy.advancedpedagogy.com" target="_blank" rel="noopener noreferrer">Interactive Video Publisher (IVy)</a></li>
-      <li><a href="https://www.kungfuquiz.com/" target="_blank" rel="noopener noreferrer">Kungfu Quiz (KFQ) Main Site</a></li>
-      <li><a href="https://sifu.kungfuquiz.com/" target="_blank" rel="noopener noreferrer">Sifu Platform</a></li>
-      <li><a href="https://kungfuquiz.net/" target="_blank" rel="noopener noreferrer">KA Platform</a></li>
+      <li>Manage multiple web and platform-based projects, overseeing timelines, team coordination, and release management.</li>
+      <li>Facilitate sprint planning, daily stand-ups, and stakeholder meetings to ensure smooth project execution.</li>
+      <li>Coordinate with cross-functional teams including developers, designers, and QA to meet deliverables.</li>
+      <li>Design and execute test plans covering functional, regression, integration, and performance testing.</li>
+      <li>Conduct User Acceptance Testing (UAT) sessions and review final deliverables before production deployment.</li>
+      <li>Maintain project documentation including requirements, test cases, release notes, and progress trackers.</li>
+    </ul>
+
+    <h3>Project Business Analyst (Trainee)</h3>
+    <p><strong>InfoDevelopers Pvt. Ltd. | Jul 2021 – Dec 2021</strong></p>
+    <ul>
+      <li>Participated in requirement gathering and stakeholder discussions to define clear project goals.</li>
+      <li>Drafted documentation including user stories and process flows to support development and QA teams.</li>
+      <li>Helped improve communication between business and technical teams for better delivery outcomes.</li>
+    </ul>
+
+    <h3>Customer Service Representative</h3>
+    <p><strong>Innovate Tech | Dec 2020 – May 2021</strong></p>
+    <ul>
+      <li>Delivered technical assistance and product support to users via calls and chat.</li>
+      <li>Conducted user onboarding sessions and reported usability issues to the development team.</li>
+      <li>Documented user feedback and contributed to prioritizing feature improvements.</li>
+    </ul>
+
+    <h3>Marketing Executive & IT Support</h3>
+    <p><strong>Webbook | Jan 2015 – Mar 2016</strong></p>
+    <ul>
+      <li>Assisted hotel clients in upgrading digital systems, offering product setup and training.</li>
+      <li>Provided basic IT troubleshooting and support.</li>
     </ul>
   </section>
 
-  <!-- Skills -->
-  <section id="skillsSection" hidden>
+  <section id="education" tabindex="0" role="tabpanel" aria-labelledby="nav-education" hidden>
+    <h2>Education</h2>
+    <ul>
+      <li><strong>MSc in Information Technology and Applied Security</strong> — Islington College, London Metropolitan University, 2024</li>
+      <li><strong>BSc (Hons) in Computer Science</strong> — Herald College Kathmandu, University of Wolverhampton, 2019</li>
+      <li><strong>+2 in Computer Science</strong> — Kathmandu Model College, Tribhuvan University, 2014</li>
+      <li><strong>School Leaving Certificate</strong> — Buddha Jyoti Academy, 2012</li>
+    </ul>
+  </section>
+
+  <section id="projects" tabindex="0" role="tabpanel" aria-labelledby="nav-projects" hidden>
+    <h2>Professional Projects</h2>
+    <h3>Kungfu Quiz (KFQ) Platform</h3>
+    <ul>
+      <li>Worked as Project Manager, overseeing the end-to-end delivery of new features across KFQ projects.</li>
+      <li>Coordinated cross-functional teams including design, development, and QA to align goals and timelines.</li>
+      <li>Led sprint planning, daily stand-ups, and milestone tracking using GitLab Kanban boards and Excel sheets.</li>
+      <li>Collaborated with stakeholders to gather, refine, and document technical and functional requirements.</li>
+      <li>Supervised User Acceptance Testing (UAT) and ensured production readiness through structured final reviews.</li>
+      <li>Maintained comprehensive documentation including requirement documents, design flows, test plans, release notes, and project trackers.</li>
+      <li>Proposed and discussed new feature ideas to enhance platform functionality, such as AI-driven question generation and improved analytics dashboards.</li>
+      <li>Tools used: GitLab, Figma, InVision, Excel, Google Docs.</li>
+    </ul>
+
+    <h3>My Second Teacher (MST) Platform</h3>
+    <ul>
+      <li>Led comprehensive Software Quality Assurance (QA) for MST and its four forks: Global, Nepal, Alston Digital, and JelajahIlmu (Indonesia), including their back-office systems (Apollo).</li>
+      <li>Performed functional, regression, integration, and usability testing to ensure software stability, performance, and consistent user experience across all platform versions.</li>
+      <li>Collaborated with developers to identify, document, prioritize, and track defects for timely resolution.</li>
+      <li>Participated in requirements review and test planning sessions aligned with business objectives.</li>
+      <li>Delivered detailed test reports and communicated progress to stakeholders.</li>
+    </ul>
+
+    <h3>Interactive Video Publisher (IVy) – MST</h3>
+    <ul>
+      <li>Tested the IVy platform for uploading educational videos and embedding interactive questions.</li>
+      <li>Verified accurate triggering of questions during video playback for smooth user engagement.</li>
+      <li>Tested multiple question types and formats to ensure functionality and user response capture.</li>
+      <li>Reported bugs and collaborated with developers to improve platform reliability.</li>
+    </ul>
+
+    <h3>WRL Supervisor</h3>
+    <ul>
+      <li>Selected as Project Manager for the Work-Related Learning (WRL) module, overseen by Islington College.</li>
+      <li>Led and mentored 18 interns, providing guidance on project delivery and professional development.</li>
+      <li>Supervised the successful development and deployment of an HRM web application with 20+ key features, including employee management, leave requests, approvals, and event calendars.</li>
+      <li>Collaborated with fellow WRL supervisors to support career growth and adaptability across the internship program.</li>
+    </ul>
+
+    <h2>Academic Projects</h2>
+    <h3>Heart Failure Detection Data Analytics (Master’s Thesis)</h3>
+    <ul>
+      <li>Developed a data analytics model to identify key indicators and patterns associated with heart failure.</li>
+      <li>Analyzed large healthcare datasets using statistical and machine learning techniques.</li>
+      <li>Delivered actionable insights to improve diagnostic accuracy and predictive modeling.</li>
+    </ul>
+
+    <h3>Nepal Gadgets (Web-based E-commerce Application)</h3>
+    <ul>
+      <li>Designed and implemented an e-commerce platform for electronic gadgets with user and admin login functionalities.</li>
+      <li>Integrated search, product management, order confirmation, and user management features to enhance usability and sales efficiency.</li>
+    </ul>
+
+    <h2>Project Links</h2>
+    <ul>
+      <li><strong>My Second Teacher (MST) Platforms:</strong></li>
+      <ul>
+        <li><a href="https://mysecondteacher.com" target="_blank" rel="noopener noreferrer">Global</a></li>
+        <li><a href="https://mysecondteacher.com.np" target="_blank" rel="noopener noreferrer">Nepal</a></li>
+        <li><a href="https://app.alstondigital.sg/" target="_blank" rel="noopener noreferrer">Alston Digital</a></li>
+        <li><a href="https://app.jelajahilmu.com/" target="_blank" rel="noopener noreferrer">JelajahIlmu (Indonesia)</a></li>
+      </ul>
+      <li><strong>Interactive Video Publisher (IVy):</strong> <a href="https://ivy.advancedpedagogy.com" target="_blank" rel="noopener noreferrer">https://ivy.advancedpedagogy.com</a></li>
+      <li><strong>Kungfu Quiz (KFQ):</strong></li>
+      <ul>
+        <li><a href="https://www.kungfuquiz.com/" target="_blank" rel="noopener noreferrer">Main Site</a></li>
+        <li><a href="https://sifu.kungfuquiz.com/" target="_blank" rel="noopener noreferrer">Sifu Platform</a></li>
+        <li><a href="https://kungfuquiz.net/" target="_blank" rel="noopener noreferrer">KA Platform</a></li>
+      </ul>
+    </ul>
+  </section>
+
+  <section id="skills" tabindex="0" role="tabpanel" aria-labelledby="nav-skills" hidden>
     <h2>Key Skills</h2>
+
     <h3>Testing & Quality Assurance:</h3>
-    <ul class="skill-list">
+    <ul>
       <li>Black Box & White Box Testing</li>
       <li>Performance Testing</li>
       <li>Test Case Design</li>
       <li>Bug Reporting</li>
       <li>QA Documentation</li>
     </ul>
+
     <h3>Tools & Technologies:</h3>
-    <ul class="skill-list">
+    <ul>
       <li>Git</li>
       <li>GitLab</li>
       <li>Figma</li>
       <li>InVision</li>
-      <li>Slack</li>
-      <li>Google Chat</li>
-      <li>Microsoft Office Suite</li>
+      <li>Jira</li>
+      <li>Postman</li>
+      <li>Excel & Google Sheets</li>
     </ul>
-    <h3>Data Analysis:</h3>
-    <ul class="skill-list">
-      <li>Statistical Analysis</li>
-      <li>Data Visualization</li>
-      <li>Machine Learning Basics</li>
-    </ul>
+
     <h3>Project Management:</h3>
-    <ul class="skill-list">
-      <li>Sprint Planning</li>
-      <li>Task Prioritization</li>
-      <li>Team Coordination</li>
+    <ul>
+      <li>Agile & Scrum Methodologies</li>
+      <li>Sprint Planning & Retrospectives</li>
+      <li>Kanban Boards</li>
+      <li>Stakeholder Communication</li>
       <li>Documentation & Reporting</li>
     </ul>
+
+    <h3>Languages:</h3>
+    <ul>
+      <li>English (Fluent)</li>
+      <li>Nepali (Native)</li>
+    </ul>
   </section>
 
-  <!-- Contact -->
-  <section id="contactSection" hidden>
+  <section id="contact" tabindex="0" role="tabpanel" aria-labelledby="nav-contact" hidden>
     <h2>Contact Me</h2>
-    <p class="contact-info">
-      <strong>Address:</strong> Chokhachai Galli, Ward No. 24, Indrachowk, Kathmandu, Nepal<br />
-      <strong>Mobile:</strong> <a href="tel:+9779849527999">+977 9849 527999</a><br />
-      <strong>Email:</strong> <a href="mailto:shresthakush1996@gmail.com">shresthakush1996@gmail.com</a><br />
-      <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/kushmanshrestha" target="_blank" rel="noopener noreferrer">linkedin.com/in/kushmanshrestha</a>
-    </p>
-    <a href="Kush_Man_Shrestha_CV.pdf" download class="download-cv" aria-label="Download CV">Download CV</a>
+    <div class="contact-info">
+      <p><strong>Address:</strong> Chokhachai Galli, Ward No. 24, Indrachowk, Kathmandu, Nepal</p>
+      <p><strong>Mobile:</strong> <a href="tel:+9779849527999">+977 9849 527999</a></p>
+      <p><strong>Email:</strong> <a href="mailto:shresthakush1996@gmail.com">shresthakush1996@gmail.com</a></p>
+      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/kushman-shrestha/" target="_blank" rel="noopener noreferrer">linkedin.com/in/kushman-shrestha</a></p>
+      <p><strong>GitHub:</strong> <a href="https://github.com/kushshrestha" target="_blank" rel="noopener noreferrer">github.com/kushshrestha</a></p>
+    </div>
+    <a class="download-cv" href="https://drive.google.com/uc?export=download&id=YOUR_CV_FILE_ID" target="_blank" rel="noopener noreferrer" download>Download CV</a>
   </section>
 
-</main>
+</div>
 
 <script>
-  // Section toggle on nav button click
-  const sections = {
-    summary: document.getElementById('summarySection'),
-    experience: document.getElementById('experienceSection'),
-    education: document.getElementById('educationSection'),
-    projects: document.getElementById('projectsSection'),
-    skills: document.getElementById('skillsSection'),
-    contact: document.getElementById('contactSection'),
-  };
-  const navButtons = {
-    summary: document.getElementById('navSummary'),
-    experience: document.getElementById('navExperience'),
-    education: document.getElementById('navEducation'),
-    projects: document.getElementById('navProjects'),
-    skills: document.getElementById('navSkills'),
-    contact: document.getElementById('navContact'),
-  };
+  // Tab navigation
+  const tabs = document.querySelectorAll('nav button');
+  const sections = document.querySelectorAll('section[role="tabpanel"]');
 
-  function showSection(name) {
-    Object.entries(sections).forEach(([key, section]) => {
-      if (key === name) {
-        section.hidden = false;
-        section.classList.add('visible');
-      } else {
-        section.hidden = true;
-        section.classList.remove('visible');
-      }
+  function activateTab(index) {
+    tabs.forEach((tab, i) => {
+      const selected = i === index;
+      tab.classList.toggle('active', selected);
+      tab.setAttribute('aria-selected', selected);
+      sections[i].hidden = !selected;
+      if(selected) sections[i].classList.add('visible'); else sections[i].classList.remove('visible');
     });
-    Object.entries(navButtons).forEach(([key, btn]) => {
-      if (key === name) {
-        btn.classList.add('active');
-      } else {
-        btn.classList.remove('active');
-      }
-    });
-    // scroll top on section change
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    sections[index].focus();
   }
 
-  Object.entries(navButtons).forEach(([key, btn]) => {
-    btn.addEventListener('click', () => showSection(key));
+  tabs.forEach((tab, idx) => {
+    tab.addEventListener('click', () => activateTab(idx));
+    tab.addEventListener('keydown', (e) => {
+      if(e.key === 'ArrowRight') {
+        e.preventDefault();
+        const next = (idx + 1) % tabs.length;
+        tabs[next].focus();
+      } else if(e.key === 'ArrowLeft') {
+        e.preventDefault();
+        const prev = (idx - 1 + tabs.length) % tabs.length;
+        tabs[prev].focus();
+      } else if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        activateTab(idx);
+      }
+    });
   });
 
-  // Initial display
-  showSection('summary');
+  // On load, activate first tab
+  activateTab(0);
+
+  // Animate sections on scroll (fade in)
+  function revealOnScroll() {
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if(rect.top < window.innerHeight - 100) {
+        section.classList.add('visible');
+      }
+    });
+  }
+  window.addEventListener('scroll', revealOnScroll);
+  revealOnScroll();
 
   // Dark mode toggle
-  const darkModeToggle = document.getElementById('darkModeToggle');
-  darkModeToggle.addEventListener('click', () => {
+  const toggle = document.getElementById('darkModeToggle');
+  toggle.addEventListener('click', () => {
     document.body.classList.toggle('dark');
-    if(document.body.classList.contains('dark')){
-      darkModeToggle.textContent = 'Light Mode';
+    if(document.body.classList.contains('dark')) {
+      toggle.textContent = 'Light Mode';
       localStorage.setItem('darkMode', 'enabled');
     } else {
-      darkModeToggle.textContent = 'Dark Mode';
-      localStorage.setItem('darkMode', 'disabled');
+      toggle.textContent = 'Dark Mode';
+      localStorage.removeItem('darkMode');
     }
   });
 
-  // Load dark mode setting from localStorage
-  window.addEventListener('DOMContentLoaded', () => {
-    if(localStorage.getItem('darkMode') === 'enabled'){
-      document.body.classList.add('dark');
-      darkModeToggle.textContent = 'Light Mode';
-    } else {
-      darkModeToggle.textContent = 'Dark Mode';
-    }
-  });
+  // Remember dark mode preference
+  if(localStorage.getItem('darkMode') === 'enabled') {
+    document.body.classList.add('dark');
+    toggle.textContent = 'Light Mode';
+  }
 </script>
 
 </body>
 </html>
+
