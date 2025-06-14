@@ -1,535 +1,521 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kush Man Shrestha | Portfolio</title>
-  <style>
-    /* Reset & base */
-    * {
-      box-sizing: border-box;
-      margin: 0; padding: 0;
-      scroll-behavior: smooth;
-    }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #121212;
-      color: #eee;
-      overflow-x: hidden;
-      line-height: 1.6;
-    }
-    a {
-      color: #0ef;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    a:hover {
-      color: #39f;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kush Man Shrestha — Portfolio</title>
+<style>
+  /* Reset & basics */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f7fa;
+    color: #222;
+    line-height: 1.6;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+  body.dark {
+    background-color: #121212;
+    color: #eee;
+  }
+  a {
+    color: #0078d7;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  header {
+    background: linear-gradient(90deg, #0078d7, #00aaff);
+    color: white;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0; z-index: 10;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.15);
+  }
+  header h1 {
+    margin: 0; font-weight: 700; font-size: 1.5rem;
+    letter-spacing: 1.5px;
+  }
+  nav {
+    display: flex; gap: 1rem;
+  }
+  nav button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+  }
+  nav button:hover, nav button.active {
+    background-color: rgba(255 255 255 / 0.2);
+  }
+  main {
+    max-width: 900px;
+    margin: 2rem auto 4rem;
+    padding: 0 1rem;
+  }
+  section {
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  h2 {
+    border-bottom: 3px solid #0078d7;
+    padding-bottom: 0.25rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+  h3 {
+    margin: 0.5rem 0 0.25rem;
+    font-weight: 700;
+    color: #0078d7;
+  }
+  p, ul {
+    margin-top: 0;
+  }
+  ul {
+    padding-left: 1.2rem;
+  }
+  ul li {
+    margin-bottom: 0.25rem;
+  }
+  .contact-info a {
+    display: inline-block;
+    margin-right: 1.2rem;
+    font-weight: 600;
+  }
+  .download-cv {
+    display: inline-block;
+    margin-top: 1rem;
+    background-color: #0078d7;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    font-weight: 700;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  .download-cv:hover {
+    background-color: #005ea2;
+  }
 
-    /* Container */
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 20px 100px;
-    }
+  /* Dark mode overrides */
+  body.dark a {
+    color: #66aaff;
+  }
+  body.dark .download-cv {
+    background-color: #3399ff;
+  }
+  body.dark .download-cv:hover {
+    background-color: #0078d7;
+  }
 
-    /* Header & Nav */
+  /* Section content styles */
+  .job, .project, .education-item, .skill-list {
+    margin-bottom: 1rem;
+  }
+  .job-title, .project-title {
+    font-weight: 700;
+  }
+  .timeline {
+    border-left: 3px solid #0078d7;
+    padding-left: 1rem;
+  }
+  .timeline-item {
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -11px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    background-color: #0078d7;
+    border-radius: 50%;
+  }
+
+  /* Dark mode timeline */
+  body.dark .timeline {
+    border-left: 3px solid #3399ff;
+  }
+  body.dark .timeline-item::before {
+    background-color: #3399ff;
+  }
+
+  /* Buttons container for sections */
+  .section-buttons {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .section-buttons button {
+    background-color: #0078d7;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  .section-buttons button:hover,
+  .section-buttons button.active {
+    background-color: #005ea2;
+  }
+  body.dark .section-buttons button {
+    background-color: #3399ff;
+  }
+  body.dark .section-buttons button:hover,
+  body.dark .section-buttons button.active {
+    background-color: #0078d7;
+  }
+
+  /* Dark mode toggle button */
+  #darkModeToggle {
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  #darkModeToggle:hover {
+    background-color: white;
+    color: #0078d7;
+  }
+  body.dark #darkModeToggle {
+    border-color: #3399ff;
+    color: #3399ff;
+  }
+  body.dark #darkModeToggle:hover {
+    background-color: #3399ff;
+    color: white;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
     header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      background: #1f1f1fcc;
-      backdrop-filter: saturate(180%) blur(10px);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.7);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 20px;
-      z-index: 1000;
-    }
-    .logo {
-      font-weight: 900;
-      font-size: 1.4rem;
-      letter-spacing: 0.1em;
-      color: #0ef;
-      cursor: default;
-      user-select: none;
-      font-family: 'Montserrat', sans-serif;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 1rem;
     }
     nav {
-      display: flex;
-      gap: 24px;
-    }
-    nav a {
-      font-weight: 600;
-      font-size: 1rem;
-      padding: 6px 4px;
-      position: relative;
-      user-select: none;
-    }
-    nav a.active,
-    nav a:hover {
-      color: #39f;
-    }
-    nav a.active::after,
-    nav a:hover::after {
-      content: "";
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: #39f;
-      border-radius: 2px;
-    }
-
-    /* Hamburger for mobile */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      gap: 4px;
-    }
-    .hamburger div {
-      width: 25px;
-      height: 3px;
-      background: #0ef;
-      border-radius: 2px;
-      transition: 0.3s;
-    }
-    /* Mobile nav active */
-    nav.mobile-show {
-      position: fixed;
-      top: 60px;
-      right: 0;
-      background: #1f1f1fdd;
-      width: 200px;
-      height: calc(100vh - 60px);
-      flex-direction: column;
-      padding: 20px;
-      box-shadow: -3px 0 8px rgba(0,0,0,0.6);
-      transform: translateX(0);
-      transition: transform 0.3s ease;
-      z-index: 999;
-    }
-    nav.mobile-hide {
-      transform: translateX(100%);
-    }
-
-    /* Hero */
-    #hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
       justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 20px;
-      user-select: none;
     }
-    #hero h1 {
-      font-size: 3.5rem;
-      font-weight: 900;
-      margin-bottom: 12px;
-      background: linear-gradient(90deg, #0ef, #39f);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: fadeInDown 1s ease forwards;
+    .section-buttons {
+      justify-content: center;
     }
-    #hero p {
-      font-size: 1.3rem;
-      color: #ccc;
-      max-width: 600px;
-      margin: 0 auto 40px;
-      opacity: 0.85;
-      animation: fadeInUp 1s ease forwards;
-      animation-delay: 0.4s;
-    }
-    #hero .typed-text {
-      font-weight: 700;
-      color: #39f;
-      border-right: 2px solid #39f;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 20ch; /* max typed chars */
-      animation: typing 3s steps(20) forwards, blink 0.7s step-end infinite;
-      margin: 0 auto 60px;
-      font-size: 1.2rem;
-    }
-    #hero a.download-btn {
-      display: inline-block;
-      padding: 14px 28px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      border-radius: 30px;
-      background: #0ef;
-      color: #121212;
-      box-shadow: 0 8px 15px rgba(0, 238, 255, 0.3);
-      transition: background 0.3s, box-shadow 0.3s;
-      user-select: none;
-    }
-    #hero a.download-btn:hover {
-      background: #39f;
-      box-shadow: 0 10px 25px rgba(57, 102, 255, 0.7);
-    }
-
-    /* Sections general */
-    section {
-      margin-top: 100px;
-      padding-bottom: 40px;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: all 0.8s ease;
-    }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    section h2 {
-      font-size: 2.2rem;
-      font-weight: 900;
-      color: #0ef;
-      margin-bottom: 30px;
-      border-left: 5px solid #39f;
-      padding-left: 12px;
-      user-select: none;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    /* About */
-    #about p {
-      font-size: 1.1rem;
-      max-width: 700px;
-      line-height: 1.7;
-      color: #ccc;
-    }
-
-    /* Experience & Education */
-    .timeline {
-      border-left: 3px solid #0ef;
-      padding-left: 20px;
-      max-width: 700px;
-      color: #ccc;
-      user-select: none;
-    }
-    .timeline-item {
-      position: relative;
-      margin-bottom: 32px;
-      padding-left: 20px;
-    }
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      left: -12px;
-      top: 6px;
-      width: 14px;
-      height: 14px;
-      background: #39f;
-      border-radius: 50%;
-      box-shadow: 0 0 10px #39f99;
-    }
-    .timeline-item h3 {
-      font-weight: 700;
-      font-size: 1.3rem;
-      color: #0ef;
-      margin-bottom: 6px;
-    }
-    .timeline-item .date {
-      font-size: 0.9rem;
-      color: #666;
-      margin-bottom: 8px;
-      font-style: italic;
-    }
-    .timeline-item p {
-      font-size: 1rem;
-      line-height: 1.5;
-      max-width: 600px;
-    }
-
-    /* Projects grid */
-    #projects .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 20px;
-      max-width: 900px;
-    }
-    .project-card {
-      background: #1f1f1f;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.7);
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    .project-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 30px rgba(0, 110, 255, 0.8);
-    }
-    .project-card h3 {
-      color: #0ef;
-      margin-bottom: 12px;
-      user-select: none;
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
-    .project-card p {
-      flex-grow: 1;
-      font-size: 1rem;
-      color: #bbb;
-      margin-bottom: 16px;
-      line-height: 1.4;
-    }
-    .project-card a {
-      font-weight: 600;
-      color: #39f;
-      align-self: flex-start;
-      user-select: none;
-    }
-    .project-card a:hover {
-      text-decoration: underline;
-    }
-
-    /* Contact */
-    #contact form {
-      max-width: 500px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-top: 10px;
-    }
-    #contact label {
-      font-weight: 600;
-      font-size: 1rem;
-      color: #0ef;
-      user-select: none;
-    }
-    #contact input, #contact textarea {
-      padding: 12px;
-      font-size: 1rem;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-      resize: vertical;
-    }
-    #contact input:focus, #contact textarea:focus {
-      box-shadow: 0 0 10px #39f;
-      background: #222;
-      color: #eee;
-    }
-    #contact button {
-      background: #0ef;
-      border: none;
-      padding: 14px;
-      font-weight: 700;
-      color: #121212;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: background 0.3s;
-      user-select: none;
-    }
-    #contact button:hover {
-      background: #39f;
-    }
-
-    /* Footer */
-    footer {
-      margin-top: 60px;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #666;
-      user-select: none;
-      padding-bottom: 20px;
-    }
-
-    /* Animations */
-    @keyframes fadeInDown {
-      0% {
-        opacity: 0; transform: translateY(-40px);
-      }
-      100% {
-        opacity: 1; transform: translateY(0);
-      }
-    }
-    @keyframes fadeInUp {
-      0% {
-        opacity: 0; transform: translateY(40px);
-      }
-      100% {
-        opacity: 1; transform: translateY(0);
-      }
-    }
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 20ch }
-    }
-    @keyframes blink {
-      50% { border-color: transparent }
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      #hero h1 {
-        font-size: 2.4rem;
-      }
-      nav {
-        display: none;
-      }
-      .hamburger {
-        display: flex;
-      }
-      .container {
-        padding-bottom: 60px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 
 <header>
-  <div class="logo">KUSH</div>
-  <nav id="nav-links" class="mobile-hide">
-    <a href="#hero" class="active">Home</a>
-    <a href="#about">About</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
+  <h1>Kush Man Shrestha</h1>
+  <nav>
+    <button id="navSummary" class="active">Summary</button>
+    <button id="navExperience">Experience</button>
+    <button id="navEducation">Education</button>
+    <button id="navProjects">Projects</button>
+    <button id="navSkills">Skills</button>
+    <button id="navContact">Contact</button>
   </nav>
-  <div class="hamburger" id="hamburger">
-    <div></div><div></div><div></div>
-  </div>
+  <button id="darkModeToggle" aria-label="Toggle Dark Mode">Dark Mode</button>
 </header>
 
-<main class="container">
-  <section id="hero">
-    <h1>Kush Man Shrestha</h1>
-    <p>Software QA Engineer &amp; Project Coordinator with 3+ years of experience</p>
-    <div class="typed-text">Quality Assurance | Project Management | Automation</div>
-    <a href="kush-cv.pdf" class="download-btn" download>Download CV</a>
-  </section>
+<main>
 
-  <section id="about">
-    <h2>About Me</h2>
+  <!-- Professional Summary -->
+  <section id="summarySection" class="visible">
+    <h2>Professional Summary</h2>
     <p>
-      Detail-oriented Software Quality Assurance Engineer with a proven track record in software testing, project coordination, and quality improvement. Skilled in manual and automated testing, team mentoring, and client communication. Passionate about delivering high-quality software products on time.
+      Detail-oriented Software Quality Assurance Engineer with over 3 years of experience in software testing and project coordination. Currently managing projects while also contributing to QA efforts—leading cross-functional teams, gathering requirements, tracking progress, and ensuring timely delivery of high-quality software. Proficient in Black Box and White Box testing techniques with a strong focus on usability, performance, and product reliability. Recognized for clear communication, attention to detail, and commitment to continuous improvement.
     </p>
   </section>
 
-  <section id="experience">
-    <h2>Experience</h2>
+  <!-- Experience -->
+  <section id="experienceSection" hidden>
+    <h2>Professional Experience</h2>
     <div class="timeline">
-      <div class="timeline-item">
-        <h3>WRL Supervisor - Innovate Tech</h3>
-        <div class="date">Jul 2024 - Nov 2024</div>
-        <p>Led and mentored front-end interns in modern web technologies, ensuring timely project delivery.</p>
+      <div class="timeline-item job">
+        <h3 class="job-title">Software QA Engineer & Project Manager <small> | Innovate Tech | Jan 2022 – Present</small></h3>
+        <ul>
+          <li>Manage multiple web and platform-based projects, overseeing timelines, team coordination, and release management.</li>
+          <li>Facilitate sprint planning, daily stand-ups, and stakeholder meetings to ensure smooth project execution.</li>
+          <li>Coordinate with cross-functional teams including developers, designers, and QA to meet deliverables.</li>
+          <li>Design and execute test plans covering functional, regression, integration, and performance testing.</li>
+          <li>Conduct User Acceptance Testing (UAT) sessions and review final deliverables before production deployment.</li>
+          <li>Maintain project documentation including requirements, test cases, release notes, and progress trackers.</li>
+          <li>Tools used: GitLab, Figma, InVision, Google Chat, Microsoft Office Suite.</li>
+        </ul>
       </div>
-      <div class="timeline-item">
-        <h3>QA Engineer - Techsoft Solutions</h3>
-        <div class="date">Feb 2021 - Jun 2024</div>
-        <p>Executed comprehensive test plans and automated test scripts, increasing product stability by 30%.</p>
+
+      <div class="timeline-item job">
+        <h3 class="job-title">Project Business Analyst (Trainee) <small> | InfoDevelopers Pvt. Ltd. | Jul 2021 – Dec 2021</small></h3>
+        <ul>
+          <li>Participated in requirement gathering and stakeholder discussions to define clear project goals.</li>
+          <li>Drafted documentation including user stories and process flows to support development and QA teams.</li>
+          <li>Helped improve communication between business and technical teams for better delivery outcomes.</li>
+        </ul>
       </div>
-      <div class="timeline-item">
-        <h3>Junior QA Tester - Kathmandu Soft</h3>
-        <div class="date">Jan 2019 - Jan 2021</div>
-        <p>Performed manual testing and collaborated with developers to fix critical bugs before release.</p>
+
+      <div class="timeline-item job">
+        <h3 class="job-title">Customer Service Representative <small> | Innovate Tech | Dec 2020 – May 2021</small></h3>
+        <ul>
+          <li>Delivered technical assistance and product support to users via calls and chat.</li>
+          <li>Conducted user onboarding sessions and reported usability issues to the development team.</li>
+          <li>Documented user feedback and contributed to prioritizing feature improvements.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item job">
+        <h3 class="job-title">Marketing Executive & IT Support <small> | Webbook | Jan 2015 – Mar 2016</small></h3>
+        <ul>
+          <li>Assisted hotel clients in upgrading digital systems, offering product setup and training.</li>
+          <li>Provided basic IT troubleshooting and support.</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="grid">
-      <div class="project-card">
-        <h3>Sifu (Kung Fu Quiz)</h3>
-        <p>An interactive quiz platform for Kung Fu enthusiasts with real-time scoring and user profiles.</p>
-        <a href="https://sifu.kungfuquiz.com/" target="_blank" rel="noopener">View Project</a>
+  <!-- Education -->
+  <section id="educationSection" hidden>
+    <h2>Education</h2>
+    <div class="timeline">
+      <div class="timeline-item education-item">
+        <h3>MSc in Information Technology and Applied Security</h3>
+        <p>Islington College, London Metropolitan University — 2024</p>
       </div>
-      <div class="project-card">
-        <h3>Campaign Management Page</h3>
-        <p>Designed and documented detailed UI/UX requirements for an intuitive campaign page with filters and dynamic forms.</p>
+      <div class="timeline-item education-item">
+        <h3>BSc (Hons) in Computer Science</h3>
+        <p>Herald College Kathmandu, University of Wolverhampton — 2019</p>
       </div>
-      <div class="project-card">
-        <h3>Personal Portfolio Website</h3>
-        <p>Developed a modern, responsive portfolio website featuring smooth scroll animations and a downloadable CV.</p>
+      <div class="timeline-item education-item">
+        <h3>+2 in Computer Science</h3>
+        <p>Kathmandu Model College, Tribhuvan University — 2014</p>
+      </div>
+      <div class="timeline-item education-item">
+        <h3>School Leaving Certificate</h3>
+        <p>Buddha Jyoti Academy — 2012</p>
       </div>
     </div>
   </section>
 
-  <section id="contact">
+  <!-- Projects -->
+  <section id="projectsSection" hidden>
+    <h2>Professional Projects</h2>
+    <div class="project">
+      <h3>Kungfu Quiz (KFQ) Platform</h3>
+      <ul>
+        <li>Worked as Project Manager, overseeing the end-to-end delivery of new features across KFQ projects.</li>
+        <li>Coordinated cross-functional teams including design, development, and QA to align goals and timelines.</li>
+        <li>Led sprint planning, daily stand-ups, and milestone tracking using GitLab Kanban boards and Excel sheets.</li>
+        <li>Collaborated with stakeholders to gather, refine, and document technical and functional requirements.</li>
+        <li>Supervised User Acceptance Testing (UAT) and ensured production readiness through structured final reviews.</li>
+        <li>Maintained comprehensive documentation including requirement documents, design flows, test plans, release notes, and project trackers.</li>
+        <li>Proposed and discussed new feature ideas to enhance platform functionality, such as AI-driven question generation and improved analytics dashboards.</li>
+        <li>Tools used: GitLab, Figma, InVision, Excel, Google Docs.</li>
+      </ul>
+    </div>
+    <div class="project">
+      <h3>My Second Teacher (MST) Platform</h3>
+      <ul>
+        <li>Led comprehensive Software Quality Assurance (QA) for MST and its four forks: Global, Nepal, Alston Digital, and JelajahIlmu (Indonesia), including their back-office systems (Apollo).</li>
+        <li>Performed functional, regression, integration, and usability testing to ensure software stability, performance, and consistent user experience across all platform versions.</li>
+        <li>Collaborated with developers to identify, document, prioritize, and track defects for timely resolution.</li>
+        <li>Participated in requirements review and test planning sessions aligned with business objectives.</li>
+        <li>Delivered detailed test reports and communicated progress to stakeholders.</li>
+      </ul>
+    </div>
+    <div class="project">
+      <h3>Interactive Video Publisher (IVy) – MST</h3>
+      <ul>
+        <li>Tested the IVy platform for uploading educational videos and embedding interactive questions.</li>
+        <li>Verified accurate triggering of questions during video playback for smooth user engagement.</li>
+        <li>Tested multiple question types and formats to ensure functionality and user response capture.</li>
+        <li>Reported bugs and collaborated with developers to improve platform reliability.</li>
+      </ul>
+    </div>
+    <div class="project">
+      <h3>WRL Supervisor</h3>
+      <ul>
+        <li>Selected as Project Manager for the Work-Related Learning (WRL) module, overseen by Islington College.</li>
+        <li>Led and mentored 18 interns, providing guidance on project delivery and professional development.</li>
+        <li>Supervised the successful development and deployment of an HRM web application with 20+ key features, including employee management, leave requests, approvals, and event calendars.</li>
+        <li>Collaborated with fellow WRL supervisors to support career growth and adaptability across the internship program.</li>
+      </ul>
+    </div>
+
+    <h2>Academic Projects</h2>
+    <div class="project">
+      <h3>Heart Failure Detection Data Analytics (Master’s Thesis)</h3>
+      <ul>
+        <li>Developed a data analytics model to identify key indicators and patterns associated with heart failure.</li>
+        <li>Analyzed large healthcare datasets using statistical and machine learning techniques.</li>
+        <li>Delivered actionable insights to improve diagnostic accuracy and predictive modeling.</li>
+      </ul>
+    </div>
+    <div class="project">
+      <h3>Nepal Gadgets (Web-based E-commerce Application)</h3>
+      <ul>
+        <li>Designed and implemented an e-commerce platform for electronic gadgets with user and admin login functionalities.</li>
+        <li>Integrated search, product management, order confirmation, and user management features to enhance usability and sales efficiency.</li>
+      </ul>
+    </div>
+
+    <h2>Project Links</h2>
+    <ul>
+      <li><a href="https://mysecondteacher.com" target="_blank" rel="noopener noreferrer">My Second Teacher (Global)</a></li>
+      <li><a href="https://mysecondteacher.com.np" target="_blank" rel="noopener noreferrer">My Second Teacher (Nepal)</a></li>
+      <li><a href="https://app.alstondigital.sg/" target="_blank" rel="noopener noreferrer">Alston Digital</a></li>
+      <li><a href="https://app.jelajahilmu.com/" target="_blank" rel="noopener noreferrer">JelajahIlmu (Indonesia)</a></li>
+      <li><a href="https://ivy.advancedpedagogy.com" target="_blank" rel="noopener noreferrer">Interactive Video Publisher (IVy)</a></li>
+      <li><a href="https://www.kungfuquiz.com/" target="_blank" rel="noopener noreferrer">Kungfu Quiz (KFQ) Main Site</a></li>
+      <li><a href="https://sifu.kungfuquiz.com/" target="_blank" rel="noopener noreferrer">Sifu Platform</a></li>
+      <li><a href="https://kungfuquiz.net/" target="_blank" rel="noopener noreferrer">KA Platform</a></li>
+    </ul>
+  </section>
+
+  <!-- Skills -->
+  <section id="skillsSection" hidden>
+    <h2>Key Skills</h2>
+    <h3>Testing & Quality Assurance:</h3>
+    <ul class="skill-list">
+      <li>Black Box & White Box Testing</li>
+      <li>Performance Testing</li>
+      <li>Test Case Design</li>
+      <li>Bug Reporting</li>
+      <li>QA Documentation</li>
+    </ul>
+    <h3>Tools & Technologies:</h3>
+    <ul class="skill-list">
+      <li>Git</li>
+      <li>GitLab</li>
+      <li>Figma</li>
+      <li>InVision</li>
+      <li>Slack</li>
+      <li>Google Chat</li>
+      <li>Microsoft Office Suite</li>
+    </ul>
+    <h3>Data Analysis:</h3>
+    <ul class="skill-list">
+      <li>Statistical Analysis</li>
+      <li>Data Visualization</li>
+      <li>Machine Learning Basics</li>
+    </ul>
+    <h3>Project Management:</h3>
+    <ul class="skill-list">
+      <li>Sprint Planning</li>
+      <li>Task Prioritization</li>
+      <li>Team Coordination</li>
+      <li>Documentation & Reporting</li>
+    </ul>
+  </section>
+
+  <!-- Contact -->
+  <section id="contactSection" hidden>
     <h2>Contact Me</h2>
-    <form id="contact-form" action="mailto:shresthakush1996@gmail.com" method="POST" enctype="text/plain" onsubmit="alert('Thanks for reaching out! I will get back to you soon.');">
-      <label for="name">Name</label>
-      <input id="name" name="name" required placeholder="Your full name" />
-      <label for="email">Email</label>
-      <input id="email" name="email" type="email" required placeholder="your.email@example.com" />
-      <label for="message">Message</label>
-      <textarea id="message" name="message" rows="5" required placeholder="Write your message here..."></textarea>
-      <button type="submit">Send Message</button>
-    </form>
+    <p class="contact-info">
+      <strong>Address:</strong> Chokhachai Galli, Ward No. 24, Indrachowk, Kathmandu, Nepal<br />
+      <strong>Mobile:</strong> <a href="tel:+9779849527999">+977 9849 527999</a><br />
+      <strong>Email:</strong> <a href="mailto:shresthakush1996@gmail.com">shresthakush1996@gmail.com</a><br />
+      <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/kushmanshrestha" target="_blank" rel="noopener noreferrer">linkedin.com/in/kushmanshrestha</a>
+    </p>
+    <a href="Kush_Man_Shrestha_CV.pdf" download class="download-cv" aria-label="Download CV">Download CV</a>
   </section>
+
 </main>
 
-<footer>
-  &copy; 2025 Kush Man Shrestha. All rights reserved.
-</footer>
-
 <script>
-  // Smooth highlight active nav link on scroll
-  const sections = document.querySelectorAll('section');
-  const navLinks = document.querySelectorAll('nav a');
+  // Section toggle on nav button click
+  const sections = {
+    summary: document.getElementById('summarySection'),
+    experience: document.getElementById('experienceSection'),
+    education: document.getElementById('educationSection'),
+    projects: document.getElementById('projectsSection'),
+    skills: document.getElementById('skillsSection'),
+    contact: document.getElementById('contactSection'),
+  };
+  const navButtons = {
+    summary: document.getElementById('navSummary'),
+    experience: document.getElementById('navExperience'),
+    education: document.getElementById('navEducation'),
+    projects: document.getElementById('navProjects'),
+    skills: document.getElementById('navSkills'),
+    contact: document.getElementById('navContact'),
+  };
 
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(sec => {
-      const top = window.scrollY;
-      const offset = sec.offsetTop - 80;
-      const height = sec.offsetHeight;
-      if(top >= offset && top < offset + height) {
-        current = sec.getAttribute('id');
+  function showSection(name) {
+    Object.entries(sections).forEach(([key, section]) => {
+      if (key === name) {
+        section.hidden = false;
+        section.classList.add('visible');
+      } else {
+        section.hidden = true;
+        section.classList.remove('visible');
       }
     });
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if(link.getAttribute('href').slice(1) === current) {
-        link.classList.add('active');
+    Object.entries(navButtons).forEach(([key, btn]) => {
+      if (key === name) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
       }
     });
+    // scroll top on section change
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  Object.entries(navButtons).forEach(([key, btn]) => {
+    btn.addEventListener('click', () => showSection(key));
   });
 
-  // Animate sections on scroll
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, {threshold: 0.15});
-  sections.forEach(sec => observer.observe(sec));
+  // Initial display
+  showSection('summary');
 
-  // Hamburger toggle on mobile
-  const hamburger = document.getElementById('hamburger');
-  const nav = document.getElementById('nav-links');
-
-  hamburger.addEventListener('click', () => {
-    if(nav.classList.contains('mobile-show')) {
-      nav.classList.remove('mobile-show');
-      nav.classList.add('mobile-hide');
+  // Dark mode toggle
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  darkModeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    if(document.body.classList.contains('dark')){
+      darkModeToggle.textContent = 'Light Mode';
+      localStorage.setItem('darkMode', 'enabled');
     } else {
-      nav.classList.remove('mobile-hide');
-      nav.classList.add('mobile-show');
+      darkModeToggle.textContent = 'Dark Mode';
+      localStorage.setItem('darkMode', 'disabled');
     }
   });
 
-  // Close nav on link click (mobile)
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if(window.innerWidth <= 768) {
-        nav.classList.remove('mobile-show');
-        nav.classList.add('mobile-hide');
-      }
-    });
+  // Load dark mode setting from localStorage
+  window.addEventListener('DOMContentLoaded', () => {
+    if(localStorage.getItem('darkMode') === 'enabled'){
+      document.body.classList.add('dark');
+      darkModeToggle.textContent = 'Light Mode';
+    } else {
+      darkModeToggle.textContent = 'Dark Mode';
+    }
   });
 </script>
 
