@@ -1,23 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kush Man Shrestha | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #0f1115;
       --text: #eaeaea;
       --accent: #1abc9c;
-      --card: #1c1f26;
+      --card: rgba(28, 31, 38, 0.75);
+      --card-hover: rgba(28, 31, 38, 0.9);
       --transition: 0.4s ease-in-out;
+      --shadow: 0 8px 24px rgba(0, 188, 165, 0.25);
     }
 
     body.light {
       --bg: #fdfdfd;
       --text: #111;
-      --card: #fff;
+      --card: rgba(255 255 255 / 0.8);
+      --card-hover: rgba(255 255 255 / 0.95);
+      --accent: #16a085;
+      --shadow: 0 8px 24px rgba(22, 160, 133, 0.25);
     }
 
     * {
@@ -32,263 +37,425 @@
       color: var(--text);
       transition: background var(--transition), color var(--transition);
       scroll-behavior: smooth;
+      overflow-x: hidden;
+      min-height: 100vh;
     }
 
+    /* Header with layered background and subtle parallax */
     header {
       position: relative;
-      background: linear-gradient(135deg, #1abc9c 10%, #2c3e50 100%);
-      padding: 60px 20px;
+      padding: 80px 20px 100px;
       text-align: center;
-      color: white;
       overflow: hidden;
+      background: linear-gradient(135deg, #1abc9c 10%, #2c3e50 100%);
+      color: white;
+      clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      user-select: none;
+    }
+
+    /* Layered circles for design depth */
+    header::before, header::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.3;
+      z-index: 0;
+    }
+    header::before {
+      width: 250px;
+      height: 250px;
+      background: #1abc9c;
+      top: 20px;
+      left: 30%;
+      transform: translateX(-50%);
+    }
+    header::after {
+      width: 350px;
+      height: 350px;
+      background: #16a085;
+      top: 60px;
+      right: 15%;
+      transform: translateX(50%);
     }
 
     header h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
+      font-size: 3.8rem;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+      letter-spacing: 0.1em;
+      text-shadow: 0 0 8px rgba(255 255 255 / 0.5);
     }
 
     header p {
-      font-size: 1.2rem;
-      opacity: 0.9;
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-top: 12px;
+      opacity: 0.85;
+      position: relative;
+      z-index: 1;
     }
 
+    /* Navigation styled as tabs */
     .nav {
       position: sticky;
       top: 0;
       background: var(--bg);
-      padding: 10px 0;
-      text-align: center;
-      z-index: 999;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+      z-index: 1000;
+      user-select: none;
+      backdrop-filter: saturate(180%) blur(12px);
     }
 
     .nav button {
       background: transparent;
       border: none;
       color: var(--text);
-      padding: 10px 20px;
-      margin: 0 10px;
-      font-size: 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 12px 30px;
+      border-radius: 50px;
       cursor: pointer;
+      transition: all 0.35s ease;
       position: relative;
-      transition: color var(--transition);
+      box-shadow: inset 0 0 0 0 var(--accent);
     }
 
-    .nav button::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
+    .nav button:hover {
+      color: var(--accent);
+      box-shadow: inset 0 -3px 0 0 var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .nav button.active {
+      color: white;
       background: var(--accent);
-      left: 50%;
-      bottom: 0;
-      transition: 0.3s;
+      box-shadow: 0 8px 20px var(--shadow);
+      transform: translateY(-5px);
+      font-weight: 700;
     }
 
-    .nav button:hover::after {
-      width: 100%;
-      left: 0;
-    }
-
+    /* Container & sections */
     .container {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 20px;
+      max-width: 960px;
+      margin: 50px auto 80px;
+      padding: 0 15px;
+      scroll-margin-top: 70px; /* To offset fixed nav */
     }
 
     section {
-      margin-bottom: 60px;
+      margin-bottom: 80px;
       opacity: 0;
       transform: translateY(40px);
-      transition: all 0.6s ease;
+      transition: all 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform, opacity;
     }
-
     section.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
     h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
+      font-size: 2.6rem;
+      margin-bottom: 30px;
       color: var(--accent);
-      border-left: 4px solid var(--accent);
-      padding-left: 10px;
+      border-left: 6px solid var(--accent);
+      padding-left: 14px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      user-select: none;
+      text-shadow: 0 0 4px var(--accent);
     }
 
+    /* Glassmorphism cards */
     .card {
       background: var(--card);
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-      margin-bottom: 20px;
-      transition: transform 0.3s ease;
+      backdrop-filter: saturate(180%) blur(20px);
+      padding: 25px 30px;
+      border-radius: 16px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+      margin-bottom: 24px;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      cursor: default;
+      user-select: text;
     }
-
     .card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0,188,165,0.4);
     }
 
+    /* Timeline style for experience */
     .timeline {
-      border-left: 2px solid var(--accent);
-      padding-left: 20px;
+      border-left: 3px solid var(--accent);
+      padding-left: 30px;
+      position: relative;
     }
 
     .timeline .card {
-      margin-left: 20px;
+      margin-left: 30px;
+      position: relative;
+      cursor: default;
+    }
+    .timeline .card::before {
+      content: "";
+      position: absolute;
+      left: -24px;
+      top: 22px;
+      width: 14px;
+      height: 14px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--accent);
+      transition: background 0.3s ease;
     }
 
+    /* Download CV button */
     .btn {
       display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
+      margin-top: 25px;
+      padding: 14px 32px;
       background: var(--accent);
       color: white;
-      border-radius: 5px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 50px;
       text-decoration: none;
-      transition: background 0.3s;
+      box-shadow: 0 8px 24px var(--shadow);
+      user-select: none;
+      transition: background 0.35s ease, box-shadow 0.35s ease;
+      user-select: none;
     }
-
     .btn:hover {
       background: #16a085;
+      box-shadow: 0 12px 35px rgba(22, 160, 133, 0.7);
+      transform: translateY(-3px);
     }
 
+    /* Contact links styling */
+    .card a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .card a:hover {
+      color: #16a085;
+      text-decoration: underline;
+    }
+
+    .social-links {
+      margin-top: 15px;
+      text-align: center;
+    }
+    .social-links a {
+      margin: 0 15px;
+      font-size: 1.6rem;
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.3s;
+      user-select: none;
+    }
+    .social-links a:hover {
+      color: #16a085;
+    }
+
+    /* Footer */
     .footer {
       text-align: center;
       padding: 30px 20px;
       font-size: 0.9rem;
       color: #aaa;
+      user-select: none;
+      margin-bottom: 40px;
     }
 
+    /* Dark/light mode toggle */
     .mode-toggle {
       position: fixed;
-      top: 15px;
-      right: 15px;
-      z-index: 1000;
+      top: 20px;
+      right: 20px;
+      z-index: 1100;
       background: var(--card);
       color: var(--text);
-      padding: 8px 14px;
-      border-radius: 5px;
+      padding: 10px 18px;
+      border-radius: 30px;
       cursor: pointer;
-      font-size: 0.9rem;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      user-select: none;
       transition: all var(--transition);
     }
-
-    .social-links a {
-      margin: 0 10px;
-      color: var(--accent);
-      font-size: 1.2rem;
-      text-decoration: none;
+    .mode-toggle:hover {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 12px 30px var(--shadow);
+      transform: translateY(-2px);
     }
 
+    /* Responsive tweaks */
     @media (max-width: 768px) {
       header h1 {
-        font-size: 2.2rem;
+        font-size: 2.8rem;
+      }
+
+      .nav {
+        flex-wrap: wrap;
+        gap: 12px;
       }
 
       .nav button {
-        margin: 5px 5px;
-        font-size: 0.9rem;
+        padding: 10px 18px;
+        font-size: 1rem;
+      }
+
+      .container {
+        margin: 30px auto 60px;
+        padding: 0 12px;
+      }
+
+      h2 {
+        font-size: 2.2rem;
+        padding-left: 8px;
+        border-left-width: 4px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      .nav button {
+        flex: 1 1 45%;
+        margin-bottom: 8px;
       }
     }
   </style>
 </head>
 <body>
 
-<div class="mode-toggle" onclick="toggleMode()">Toggle Mode</div>
+  <div class="mode-toggle" aria-label="Toggle dark/light mode" role="button" tabindex="0" onclick="toggleMode()" onkeypress="if(event.key==='Enter'){toggleMode()}">
+    Toggle Mode
+  </div>
 
-<header>
-  <h1>Kush Man Shrestha</h1>
-  <p>Software QA Engineer & Project Manager</p>
-</header>
+  <header>
+    <h1>Kush Man Shrestha</h1>
+    <p>Software QA Engineer & Project Manager</p>
+  </header>
 
-<nav class="nav">
-  <button onclick="scrollToSection('projects')">Projects</button>
-  <button onclick="scrollToSection('experience')">Experience</button>
-  <button onclick="scrollToSection('education')">Education</button>
-  <button onclick="scrollToSection('skills')">Skills</button>
-  <button onclick="scrollToSection('contact')">Contact</button>
-</nav>
+  <nav class="nav" role="tablist" aria-label="Portfolio sections navigation">
+    <button role="tab" aria-selected="true" aria-controls="projects" id="tab-projects" onclick="activateTab('projects')">Projects</button>
+    <button role="tab" aria-selected="false" aria-controls="experience" id="tab-experience" onclick="activateTab('experience')">Experience</button>
+    <button role="tab" aria-selected="false" aria-controls="education" id="tab-education" onclick="activateTab('education')">Education</button>
+    <button role="tab" aria-selected="false" aria-controls="skills" id="tab-skills" onclick="activateTab('skills')">Skills</button>
+    <button role="tab" aria-selected="false" aria-controls="contact" id="tab-contact" onclick="activateTab('contact')">Contact</button>
+  </nav>
 
-<div class="container">
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="card">🔹 Kungfu Quiz Platform – PM + QA <br/><a href="https://www.kungfuquiz.com" target="_blank">Visit</a></div>
-    <div class="card">🔹 My Second Teacher – Led QA across 4 forks<br/><a href="https://mysecondteacher.com" target="_blank">Visit</a></div>
-    <div class="card">🔹 IVy Interactive Publisher – Video + Quiz QA</div>
-    <div class="card">🔹 WRL HRM Web App – Mentored 18 interns</div>
-    <div class="card">🔹 Heart Failure Detection (Thesis) – Data + ML</div>
-    <div class="card">🔹 Nepal Gadgets – E-commerce website</div>
-    <a class="btn" href="kush-cv.pdf" download>📄 Download CV</a>
-  </section>
+  <main class="container">
+    <section id="projects" role="tabpanel" aria-labelledby="tab-projects" tabindex="0">
+      <h2>Projects</h2>
+      <div class="card">🔹 Kungfu Quiz Platform – PM + QA <br/><a href="https://www.kungfuquiz.com" target="_blank" rel="noopener noreferrer">Visit</a></div>
+      <div class="card">🔹 My Second Teacher – Led QA across 4 forks<br/><a href="https://mysecondteacher.com" target="_blank" rel="noopener noreferrer">Visit</a></div>
+      <div class="card">🔹 IVy Interactive Publisher – Video + Quiz QA</div>
+      <div class="card">🔹 WRL HRM Web App – Mentored 18 interns</div>
+      <div class="card">🔹 Heart Failure Detection (Thesis) – Data + ML</div>
+      <div class="card">🔹 Nepal Gadgets – E-commerce website</div>
+      <a class="btn" href="kush-cv.pdf" download aria-label="Download CV PDF">📄 Download CV</a>
+    </section>
 
-  <section id="experience">
-    <h2>Experience</h2>
-    <div class="timeline">
-      <div class="card">📌 Software QA Engineer & PM<br/>Innovate Tech (2022–Now)</div>
-      <div class="card">📌 Project Analyst (Trainee)<br/>InfoDevelopers (2021)</div>
-      <div class="card">📌 Customer Support<br/>Innovate Tech (2020–2021)</div>
-      <div class="card">📌 Marketing + IT Support<br/>Webbook (2015–2016)</div>
-    </div>
-  </section>
+    <section id="experience" role="tabpanel" aria-labelledby="tab-experience" tabindex="0" hidden>
+      <h2>Experience</h2>
+      <div class="timeline">
+        <div class="card">📌 Software QA Engineer & PM<br/>Innovate Tech (2022–Now)</div>
+        <div class="card">📌 Project Analyst (Trainee)<br/>InfoDevelopers (2021)</div>
+        <div class="card">📌 Customer Support<br/>Innovate Tech (2020–2021)</div>
+        <div class="card">📌 Marketing + IT Support<br/>Webbook (2015–2016)</div>
+      </div>
+    </section>
 
-  <section id="education">
-    <h2>Education</h2>
-    <div class="card">🎓 MSc IT & Applied Security<br/>Islington College (2024)</div>
-    <div class="card">🎓 BSc (Hons) CS<br/>Herald College (2019)</div>
-    <div class="card">🎓 +2 CS<br/>KMC (2014)</div>
-    <div class="card">🎓 SLC<br/>Buddha Jyoti Academy (2012)</div>
-  </section>
+    <section id="education" role="tabpanel" aria-labelledby="tab-education" tabindex="0" hidden>
+      <h2>Education</h2>
+      <div class="card">🎓 MSc IT & Applied Security<br/>Islington College (2024)</div>
+      <div class="card">🎓 BSc (Hons) CS<br/>Herald College (2019)</div>
+      <div class="card">🎓 +2 CS<br/>KMC (2014)</div>
+      <div class="card">🎓 SLC<br/>Buddha Jyoti Academy (2012)</div>
+    </section>
 
-  <section id="skills">
-    <h2>Skills</h2>
-    <div class="card">✔️ Testing: Black Box, White Box, Regression, UAT</div>
-    <div class="card">✔️ Tools: Git, GitLab, Figma, InVision, Excel</div>
-    <div class="card">✔️ Soft Skills: Communication, PM, Leadership</div>
-    <div class="card">✔️ Other: Requirement Gathering, Documentation</div>
-  </section>
+    <section id="skills" role="tabpanel" aria-labelledby="tab-skills" tabindex="0" hidden>
+      <h2>Skills</h2>
+      <div class="card">✔️ Testing: Black Box, White Box, Regression, UAT</div>
+      <div class="card">✔️ Tools: Git, GitLab, Figma, InVision, Excel</div>
+      <div class="card">✔️ Soft Skills: Communication, PM, Leadership</div>
+      <div class="card">✔️ Other: Requirement Gathering, Documentation</div>
+    </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <div class="card">
-      📧 <a href="mailto:shresthakush1996@gmail.com">shresthakush1996@gmail.com</a><br/>
-      📞 <a href="tel:+9779849527999">+977 9849-527999</a><br/>
-      🌐 <a href="https://linkedin.com/in/kush-man-shrestha-794a53133" target="_blank">LinkedIn Profile</a>
-    </div>
-    <div class="social-links">
-      <a href="mailto:shresthakush1996@gmail.com">✉️</a>
-      <a href="https://linkedin.com/in/kush-man-shrestha-794a53133" target="_blank">🔗</a>
-    </div>
-  </section>
-</div>
+    <section id="contact" role="tabpanel" aria-labelledby="tab-contact" tabindex="0" hidden>
+      <h2>Contact</h2>
+      <div class="card">
+        📧 <a href="mailto:shresthakush1996@gmail.com">shresthakush1996@gmail.com</a><br />
+        📞 <a href="tel:+9779849527999">+977 9849-527999</a><br />
+        🌐 <a href="https://linkedin.com/in/kush-man-shrestha-794a53133" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
+      </div>
+      <div class="social-links">
+        <a href="mailto:shresthakush1996@gmail.com" aria-label="Email">✉️</a>
+        <a href="https://linkedin.com/in/kush-man-shrestha-794a53133" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">🔗</a>
+      </div>
+    </section>
+  </main>
 
-<div class="footer">
-  &copy; 2025 Kush Man Shrestha. Designed with ❤️ using HTML, CSS, JS only.
-</div>
+  <footer class="footer">
+    &copy; 2025 Kush Man Shrestha. Designed with ❤️ using HTML, CSS, JS only.
+  </footer>
 
-<script>
-  function scrollToSection(id) {
-    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
-  }
+  <script>
+    // Tab navigation logic: show/hide sections, set active button
+    const tabs = document.querySelectorAll(".nav button");
+    const sections = document.querySelectorAll("main section");
 
-  function toggleMode() {
-    document.body.classList.toggle("light");
-  }
+    function activateTab(id) {
+      tabs.forEach(btn => {
+        btn.classList.toggle("active", btn.getAttribute("aria-controls") === id);
+        btn.setAttribute("aria-selected", btn.getAttribute("aria-controls") === id);
+      });
+      sections.forEach(sec => {
+        if (sec.id === id) {
+          sec.hidden = false;
+          sec.classList.add("visible");
+          sec.focus();
+        } else {
+          sec.hidden = true;
+          sec.classList.remove("visible");
+        }
+      });
+    }
 
-  // Intersection animation
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
+    // Initialize first tab active
+    activateTab('projects');
 
-  document.querySelectorAll("section").forEach(sec => observer.observe(sec));
-</script>
+    // Dark/Light mode toggle
+    function toggleMode() {
+      document.body.classList.toggle("light");
+    }
+
+    // Intersection animation for when hidden sections appear (only for initially visible)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, {threshold: 0.2});
+
+    document.querySelectorAll("section").forEach(sec => observer.observe(sec));
+
+  </script>
 
 </body>
 </html>
