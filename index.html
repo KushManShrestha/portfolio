@@ -1,348 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Kush Man Shrestha - Portfolio</title>
-
-<style>
-  /* Import Google Fonts */
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono&display=swap');
-
-  /* Reset */
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-  }
-  body {
-    font-family: 'Inter', sans-serif;
-    background-color: #f4f7fb;
-    color: #1f2937;
-    line-height: 1.6;
-    scroll-behavior: smooth;
-  }
-
-  /* Container */
-  .container {
-    max-width: 900px;
-    margin: 3rem auto 4rem;
-    padding: 0 1.5rem;
-  }
-
-  /* Header */
-  header {
-    background: linear-gradient(90deg, #0f4c81 0%, #3a77bf 100%);
-    color: white;
-    padding: 3rem 1.5rem 3rem;
-    text-align: center;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(15, 76, 129, 0.3);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  header h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    font-family: 'JetBrains Mono', monospace;
-    margin-bottom: 0.3rem;
-    letter-spacing: 2px;
-  }
-  header p {
-    font-size: 1.2rem;
-    font-weight: 400;
-    font-style: italic;
-    opacity: 0.85;
-  }
-
-  /* Navigation */
-  nav {
-    margin-top: 1.6rem;
-    display: flex;
-    justify-content: center;
-    gap: 1.75rem;
-  }
-  nav a {
-    color: #cbd5e1;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.05rem;
-    padding-bottom: 4px;
-    border-bottom: 2px solid transparent;
-    transition: all 0.25s ease;
-  }
-  nav a:hover,
-  nav a:focus {
-    border-color: #f97316; /* warm accent orange */
-    color: #f97316;
-  }
-
-  /* Section titles */
-  section h2 {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 2rem;
-    font-weight: 700;
-    color: #0f4c81;
-    margin-bottom: 1rem;
-    border-left: 6px solid #f97316;
-    padding-left: 0.75rem;
-  }
-
-  /* Sections styling */
-  section {
-    background: white;
-    border-radius: 10px;
-    padding: 2rem 2.5rem;
-    box-shadow: 0 6px 15px rgb(15 76 129 / 0.12);
-    margin-bottom: 3rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  section:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 25px rgb(15 76 129 / 0.25);
-  }
-
-  /* About */
-  #about p {
-    font-size: 1.15rem;
-    max-width: 650px;
-    margin: 0 auto;
-    color: #374151;
-  }
-
-  /* Lists */
-  ul {
-    list-style-type: disc;
-    padding-left: 1.4rem;
-    color: #4b5563;
-  }
-  ul li {
-    margin-bottom: 0.5rem;
-    font-size: 1.05rem;
-  }
-
-  /* Two column grid for Education & Experience */
-  .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-  }
-  @media (max-width: 700px) {
-    .grid-2 {
-      grid-template-columns: 1fr;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kush Man Shrestha | Portfolio</title>
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --accent: #3498db;
+      --light-bg: #ecf0f1;
+      --text: #333;
+      --shadow: rgba(0, 0, 0, 0.1);
     }
-  }
 
-  /* Job/Project Cards */
-  .job, .project {
-    margin-bottom: 1.25rem;
-  }
-  .job-title, .project-title {
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: #111827;
-    margin-bottom: 0.25rem;
-  }
-  .company, .project-tech {
-    font-style: italic;
-    color: #6b7280;
-    font-size: 0.9rem;
-    margin-bottom: 0.25rem;
-  }
-  .job-dates {
-    font-size: 0.85rem;
-    color: #9ca3af;
-    margin-bottom: 0.5rem;
-  }
-  .job-desc, .project-desc {
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #374151;
-  }
-  .job-desc ul {
-    list-style-type: circle;
-  }
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      background-color: var(--light-bg);
+      color: var(--text);
+      scroll-behavior: smooth;
+    }
 
-  /* Links in projects */
-  .project-desc a {
-    color: #2563eb;
-    font-weight: 600;
-    transition: color 0.3s ease;
-  }
-  .project-desc a:hover {
-    color: #f97316;
-  }
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
 
-  /* Certifications */
-  .cert-list {
-    list-style-type: square;
-    color: #4b5563;
-    font-size: 1.05rem;
-  }
-  .cert-list li {
-    margin-bottom: 0.5rem;
-  }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
 
-  /* Contact Info */
-  .contact-info p {
-    font-size: 1.1rem;
-    margin-bottom: 0.4rem;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .contact-info a {
-    color: #2563eb;
-    text-decoration: none;
-    font-weight: 600;
-  }
-  .contact-info a:hover {
-    color: #f97316;
-  }
+    nav {
+      margin-top: 10px;
+    }
 
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 1rem 0;
-    font-size: 0.9rem;
-    color: #6b7280;
-    user-select: none;
-  }
-</style>
+    nav button {
+      background: var(--accent);
+      border: none;
+      color: white;
+      margin: 5px;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    nav button:hover {
+      background: #2980b9;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+      background: white;
+      box-shadow: 0 0 20px var(--shadow);
+      border-radius: 10px;
+    }
+
+    section {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    h2 {
+      color: var(--primary);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 5px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .contact {
+      margin-top: 30px;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .btn-cv {
+      display: inline-block;
+      margin: 20px 0;
+      padding: 10px 20px;
+      background: var(--accent);
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .btn-cv:hover {
+      background: #2980b9;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @media (max-width: 600px) {
+      nav button {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+      }
+    }
+  </style>
 </head>
 <body>
 
 <header>
   <h1>Kush Man Shrestha</h1>
-  <p>Software Quality Assurance Engineer — Quality, Precision & Innovation</p>
+  <p>Software QA Engineer & Project Manager</p>
   <nav>
-    <a href="#about">About Me</a>
-    <a href="#skills">Skills</a>
-    <a href="#education">Education</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#certifications">Certifications</a>
-    <a href="#contact">Contact</a>
+    <button onclick="showSection('summary')">Summary</button>
+    <button onclick="showSection('experience')">Experience</button>
+    <button onclick="showSection('education')">Education</button>
+    <button onclick="showSection('projects')">Projects</button>
+    <button onclick="showSection('skills')">Skills</button>
+    <button onclick="showSection('contact')">Contact</button>
   </nav>
 </header>
 
 <div class="container">
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>
-      Detail-oriented and results-driven Software Quality Assurance Engineer with strong expertise in Black Box & White Box testing, performance testing, project analysis, and troubleshooting. Proven ability to collaborate cross-functionally to deliver high-quality software solutions.
-    </p>
+  <section id="summary" class="active">
+    <h2>Professional Summary</h2>
+    <p>Detail-oriented Software Quality Assurance Engineer with over 3 years of experience in testing and project coordination. Skilled in Black/White Box testing, usability, performance, and project delivery. Known for clarity, precision, and cross-functional leadership.</p>
+    <a class="btn-cv" href="kush-cv.pdf" download>Download CV</a>
   </section>
 
-  <section id="skills">
-    <h2>Key Skills & Competencies</h2>
+  <section id="experience">
+    <h2>Professional Experience</h2>
     <ul>
-      <li><strong>Software Testing:</strong> Black Box & White Box Testing, Performance Testing, Bug Tracking</li>
-      <li><strong>Tools:</strong> Git, GitLab, MS Office, Microsoft Teams, Slack, JIRA, Figma</li>
-      <li><strong>Data Analysis:</strong> Statistical Analysis, Data Mining, Predictive Modeling, Machine Learning</li>
-      <li><strong>Communication:</strong> Fluent in Nepali & English, excellent written & verbal skills</li>
-      <li><strong>Additional Skills:</strong> Basic Graphic Design, Content Editing, SEO Principles</li>
+      <li><strong>Software QA Engineer & Project Manager</strong><br/>Innovate Tech (Jan 2022 – Present)</li>
+      <li><strong>Project Business Analyst (Trainee)</strong><br/>InfoDevelopers (Jul 2021 – Dec 2021)</li>
+      <li><strong>Customer Service Representative</strong><br/>Innovate Tech (Dec 2020 – May 2021)</li>
+      <li><strong>Marketing Executive & IT Support</strong><br/>Webbook (Jan 2015 – Mar 2016)</li>
     </ul>
   </section>
 
   <section id="education">
     <h2>Education</h2>
-    <div class="grid-2">
-      <div>
-        <p><strong>Master’s in IT & Applied Security</strong><br>
-        Islington College (London Metropolitan University) &mdash; 2024</p>
-      </div>
-      <div>
-        <p><strong>BSc (Hons) Computer Science</strong><br>
-        Herald College Kathmandu (University of Wolverhampton) &mdash; 2019</p>
-      </div>
-      <div>
-        <p><strong>+2 in Computer Science</strong><br>
-        Kathmandu Model College (Tribhuvan University) &mdash; 2014</p>
-      </div>
-      <div>
-        <p><strong>School Leaving Certificate</strong><br>
-        Buddha Jyoti Academy &mdash; 2012</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="experience">
-    <h2>Professional Experience</h2>
-
-    <div class="job">
-      <div class="job-title">Software Quality Assurance Engineer</div>
-      <div class="company">Innovate Tech</div>
-      <div class="job-dates">Jan 2022 – Present</div>
-      <div class="job-desc">
-        <ul>
-          <li>Lead test design and execution for web and mobile applications.</li>
-          <li>Develop and maintain automated test scripts to increase test coverage.</li>
-          <li>Collaborate with developers and product managers to identify and resolve defects.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="job">
-      <div class="job-title">Junior QA Analyst</div>
-      <div class="company">Soft Solutions Pvt. Ltd.</div>
-      <div class="job-dates">July 2019 – Dec 2021</div>
-      <div class="job-desc">
-        <ul>
-          <li>Performed manual testing and reported bugs using JIRA.</li>
-          <li>Participated in sprint planning and retrospective meetings.</li>
-          <li>Supported cross-functional teams to ensure quality deliverables.</li>
-        </ul>
-      </div>
-    </div>
+    <ul>
+      <li>MSc in Information Technology and Applied Security - Islington College (2024)</li>
+      <li>BSc (Hons) Computer Science - Herald College Kathmandu (2019)</li>
+      <li>+2 in Computer Science - Kathmandu Model College (2014)</li>
+      <li>SLC - Buddha Jyoti Academy (2012)</li>
+    </ul>
   </section>
 
   <section id="projects">
-    <h2>Projects</h2>
-
-    <div class="project">
-      <div class="project-title">Sifu (Kung Fu Quiz)</div>
-      <div class="project-tech">React, JavaScript, REST API</div>
-      <div class="project-desc">
-        <p>A dynamic quiz app focused on Kung Fu knowledge, featuring interactive questions and real-time scoring.</p>
-        <p><a href="https://github.com/kushman/sifu" target="_blank">View on GitHub</a></p>
-      </div>
-    </div>
-
-    <div class="project">
-      <div class="project-title">Personal Portfolio</div>
-      <div class="project-tech">HTML, CSS, JavaScript</div>
-      <div class="project-desc">
-        <p>A professional online portfolio showcasing my skills, experience, and projects with a clean and responsive design.</p>
-        <p><a href="https://kushman.github.io/portfolio" target="_blank">Visit Portfolio</a></p>
-      </div>
-    </div>
+    <h2>Professional & Academic Projects</h2>
+    <ul>
+      <li><strong>Kungfu Quiz (KFQ)</strong> – Project management & QA. <a href="https://www.kungfuquiz.com/" target="_blank">Website</a></li>
+      <li><strong>My Second Teacher (MST)</strong> – Led QA for multiple versions. <a href="https://mysecondteacher.com/" target="_blank">Website</a></li>
+      <li><strong>Interactive Video Publisher (IVy)</strong> – Functional testing for video question platform.</li>
+      <li><strong>WRL Project (HRM Web App)</strong> – Managed and mentored intern team (2024).</li>
+      <li><strong>Heart Failure Detection (MSc Thesis)</strong> – Machine learning in healthcare analytics.</li>
+      <li><strong>Nepal Gadgets</strong> – E-commerce site built during undergrad.</li>
+    </ul>
   </section>
 
-  <section id="certifications">
-    <h2>Certifications</h2>
-    <ul class="cert-list">
-      <li>ISTQB Foundation Level – Software Testing</li>
-      <li>Certified Agile Tester (CAT)</li>
-      <li>Google IT Support Professional Certificate</li>
+  <section id="skills">
+    <h2>Skills</h2>
+    <ul>
+      <li><strong>Testing:</strong> Black/White Box, Regression, UAT</li>
+      <li><strong>Tools:</strong> Git, GitLab, Figma, InVision, Excel</li>
+      <li><strong>Soft Skills:</strong> Communication, Leadership, Problem Solving</li>
+      <li><strong>Other:</strong> Requirement Gathering, Documentation, Content Editing</li>
     </ul>
   </section>
 
   <section id="contact">
     <h2>Contact</h2>
-    <div class="contact-info">
-      <p>Email: <a href="mailto:kushman@example.com">kushman@example.com</a></p>
-      <p>Phone: +977 98XXXXXXXX</p>
-      <p>LinkedIn: <a href="https://linkedin.com/in/kushman" target="_blank">linkedin.com/in/kushman</a></p>
-      <p>GitHub: <a href="https://github.com/kushman" target="_blank">github.com/kushman</a></p>
-    </div>
+    <p><strong>Email:</strong> <a href="mailto:shresthakush1996@gmail.com">shresthakush1996@gmail.com</a></p>
+    <p><strong>Phone:</strong> <a href="tel:+9779849527999">(+977) 9849-527999</a></p>
+    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/kush-man-shrestha-794a53133/" target="_blank">linkedin.com/in/kush-man-shrestha</a></p>
+    <p><strong>Location:</strong> Indrachowk, Kathmandu, Nepal</p>
   </section>
 
 </div>
 
-<footer>
-  &copy; 2025 Kush Man Shrestha. All rights reserved.
-</footer>
+<script>
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
 
 </body>
 </html>
